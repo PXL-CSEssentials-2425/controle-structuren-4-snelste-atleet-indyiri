@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,7 +22,7 @@ namespace H3Oef4SnelsteAtleet
             InitializeComponent();
         }
 
-        string nameFastest;
+        string nameFastest = "";
         int timeFastest = 0;
 
         private void newButton_Click(object sender, RoutedEventArgs e)
@@ -38,6 +39,10 @@ namespace H3Oef4SnelsteAtleet
                     nameFastest = nameTextBox.Text;
                 }
             }
+
+            nameTextBox.Clear();
+            timeTextBox.Clear();
+            resultTextBox.Clear();
         }
 
         private void clearButton_Click(object sender, RoutedEventArgs e)
@@ -45,12 +50,17 @@ namespace H3Oef4SnelsteAtleet
             nameTextBox.Text = string.Empty;
             timeTextBox.Text = string.Empty;
             resultTextBox.Text = string.Empty;
+
         }
 
         private void fastestButton_Click(object sender, RoutedEventArgs e)
         {
-            resultTextBox.Text = $"De snelste atleet is {nameFastest} \n\rTotaal aantal seconden: {timeFastest}\n\r\n\rAantal uren: \n\rAantal minuten: \n\rAantal seconden";
-            
+            int hourAmount = timeFastest / 3600;
+            int minutesAmount = (timeFastest % 3600) / 60;
+            int secondsAmount = (timeFastest % 3600) % 60;
+
+
+            resultTextBox.Text = $"De snelste atleet is {nameFastest} \nTotaal aantal seconden: {timeFastest}\n\rAantal uren: {hourAmount}\nAantal minuten: {minutesAmount}\nAantal seconden: {secondsAmount}";
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
